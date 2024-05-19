@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<faces-config xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
+                                  http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_3.xsd"
+              version="2.3">
+
+    <application>
+        <el-resolver>org.springframework.web.jsf.el.SpringBeanFacesELResolver</el-resolver>
+    </application>
+
+    <managed-bean>
+        <managed-bean-name>tarefaBean</managed-bean-name>
+        <managed-bean-class>com.exemplo.controller.TarefaBean</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+        <managed-property>
+            <property-name>tarefaService</property-name>
+            <value>#{tarefaService}</value>
+        </managed-property>
+         <managed-property>
+            <property-name>projetoBean</property-name>
+            <value>#{projetoBean}</value>
+        </managed-property>
+    </managed-bean>
+
+    <managed-bean>
+        <managed-bean-name>projetoBean</managed-bean-name>
+        <managed-bean-class>com.exemplo.controller.ProjetoBean</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+        <managed-property>
+            <property-name>projetoService</property-name>
+            <value>#{projetoService}</value>
+        </managed-property>
+    </managed-bean>
+
+</faces-config>

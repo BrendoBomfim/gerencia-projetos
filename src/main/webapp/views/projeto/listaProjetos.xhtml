@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:rich="http://richfaces.org/rich">
+
+<h:head>
+    <title>Lista de Projetos</title>
+</h:head>
+
+<h:body>
+    <h1>Lista de Projetos</h1>
+
+    <h:form>
+        <rich:dataTable value="#{projetoBean.projetos}" var="projeto">
+            <rich:column>
+                <f:facet name="header">Título</f:facet>
+                #{projeto.titulo}
+            </rich:column>
+            <rich:column>
+                <f:facet name="header">Ações</f:facet>
+                <h:commandButton value="Visualizar" action="#{projetoBean.visualizar(projeto)}" />
+                <h:commandButton value="Editar" action="#{projetoBean.editar(projeto)}" />
+                <h:commandButton value="Excluir" action="#{projetoBean.excluir(projeto)}" />
+            </rich:column>
+        </rich:dataTable>
+
+        <h:commandButton value="Novo Projeto" action="#{projetoBean.novoProjeto()}" />
+    </h:form>
+</h:body>
+
+</html>

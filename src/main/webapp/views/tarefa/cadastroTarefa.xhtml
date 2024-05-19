@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:rich="http://richfaces.org/rich">
+
+<h:head>
+    <title>Cadastro de Tarefa</title>
+</h:head>
+
+<h:body>
+    <h:form>
+        <rich:panel header="Cadastro de Tarefa">
+            <h:panelGrid columns="2">
+                <h:outputLabel for="titulo" value="Título:" />
+                <h:inputText id="titulo" value="#{tarefaBean.tarefaSelecionada.titulo}" required="true">
+                    <f:validateLength minimum="1" maximum="21" />
+                    <f:validateRegex pattern="^(?=.*[a-zA-Z])([a-zA-Z0-9\s]+)$" />
+                </h:inputText>
+
+                <h:outputLabel for="descricao" value="Descrição:" />
+                <h:inputTextarea id="descricao" value="#{tarefaBean.tarefaSelecionada.descricao}">
+                    <f:validateLength maximum="140" />
+                </h:inputTextarea>
+
+                <h:outputLabel for="prioridade" value="Prioridade:" />
+                <rich:select id="prioridade" value="#{tarefaBean.tarefaSelecionada.prioridade}" required="true">
+                    <f:selectItem itemLabel="Selecione" itemValue="" />
+                    <f:selectItem itemLabel="Muito Alta" itemValue="Muito Alta" />
+                    <f:selectItem itemLabel="Alta" itemValue="Alta" />
+                    <f:selectItem itemLabel="Baixa" itemValue="Baixa" />
+                    <f:selectItem itemLabel="Muito Baixa" itemValue="Muito Baixa" />
+                </rich:select>
+
+                <h:outputLabel for="estimativaHoras" value="Estimativa (horas):" />
+                <h:inputText id="estimativaHoras" value="#{tarefaBean.tarefaSelecionada.estimativaHoras}" required="true">
+                    <f:convertNumber integerOnly="true" />
+                    <f:validateLongRange minimum="1" />
+                </h:inputText>
+
+                <h:commandButton value="Salvar" action="#{tarefaBean.salvar}" />
+                <h:commandButton value="Cancelar" action="#{tarefaBean.retornar}" immediate="true" />
+            </h:panelGrid>
+        </rich:panel>
+    </h:form>
+</h:body>
+
+</html>
