@@ -12,8 +12,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "PROJETO")
 public class Projeto implements Serializable{
 
     private static final long serialVersionUID = 5312744238L;
@@ -31,7 +33,7 @@ public class Projeto implements Serializable{
     @Column(name = "data_inicio")
     private Date dataInicio;
 
-    @OneToMany(mappedBy = "projeto", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "projeto", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private List<Tarefa> tarefas;
     
     public Projeto(){}

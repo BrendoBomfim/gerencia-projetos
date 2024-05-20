@@ -1,5 +1,7 @@
 package com.exemplo.model;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -11,8 +13,10 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "tarefas")
-public class Tarefa {
+@Table(name = "TAREFA")
+public class Tarefa  implements Serializable {
+
+    private static final long serialVersionUID = 2378486775L;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "projeto_id")

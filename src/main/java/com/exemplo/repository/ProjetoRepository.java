@@ -7,7 +7,6 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import javax.persistence.TypedQuery;
 import java.util.List;
 
 @Repository
@@ -18,8 +17,7 @@ public class ProjetoRepository {
 
     public List<Projeto> listarProjetos() {
         Session session = sessionFactory.getCurrentSession();
-        TypedQuery<Projeto> query = session.createQuery("from Projeto", Projeto.class);
-        return query.getResultList();
+        return session.createQuery("FROM Projeto", Projeto.class).list();
     }
 
     public Projeto buscarProjetoPorId(Long id) {
@@ -34,7 +32,6 @@ public class ProjetoRepository {
     
     public void atualizarProjeto(Projeto projeto) {
         Session session = sessionFactory.getCurrentSession();
-        System.out.println(projeto);
         session.update(projeto);
     }
     

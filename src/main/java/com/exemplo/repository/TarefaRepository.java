@@ -1,8 +1,11 @@
 package com.exemplo.repository;
 
 import org.springframework.stereotype.Repository;
+
 import com.exemplo.model.Tarefa;
+
 import java.util.List;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,12 +39,5 @@ public class TarefaRepository {
     public List<Tarefa> listarTarefas() {
         Session session = sessionFactory.getCurrentSession();
         return session.createQuery("FROM Tarefa", Tarefa.class).list();
-    }
-
-    public List<Tarefa> listarTarefasPorProjeto(Long id) {
-        Session session = sessionFactory.getCurrentSession();
-        return session
-            .createQuery("FROM Tarefa t WHERE t.projeto_id = :projeto_id", Tarefa.class)
-            .setParameter("projeto_id", id).list();
     }
 }

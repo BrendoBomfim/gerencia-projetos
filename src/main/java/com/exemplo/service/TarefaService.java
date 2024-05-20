@@ -34,8 +34,4 @@ public class TarefaService {
     public List<Tarefa> listarTarefas() {
         return tarefaRepository.listarTarefas();
     }
-
-    public List<Tarefa> listarTarefasPorProjeto(Long id) {
-        return tarefaRepository.listarTarefasPorProjeto(id);
-    }
 }

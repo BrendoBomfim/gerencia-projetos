@@ -52,7 +52,9 @@ public class ProjetoBean implements Serializable {
     }
 
     public void excluir(Projeto projeto) {
-        projetoService.excluirProjeto(projeto);
+        projetoSelecionado = projetoService.buscarProjetoPorId(projeto.getId());
+        projetoService.excluirProjeto(projetoSelecionado);
+        projetoSelecionado = new Projeto();
         projetos = projetoService.listarProjetos();
     }
 
@@ -63,6 +65,20 @@ public class ProjetoBean implements Serializable {
     }
 
     public String cancelar() {
+        return "/views/projeto/listaProjetos.xhtml?faces-redirect=true";
+    }
+
+    public String visualizar(Projeto projeto) {
+        projetoSelecionado = projetoService.buscarProjetoPorId(projeto.getId()); //passar so o id
+        return "/views/projeto/visualizarProjeto.xhtml?faces-redirect=true";
+    }
+
+    public String editar(Projeto projeto) {
+        this.projetoSelecionado = this.projetoService.buscarProjetoPorId(projeto.getId());
+        return "/views/projeto/editarProjeto.xhtml?faces-redirect=true";
+    }
+
+    public String retornar() {
         return "/views/projeto/listaProjetos.xhtml?faces-redirect=true";
     }
 
@@ -88,21 +104,6 @@ public class ProjetoBean implements Serializable {
 
     public List<Tarefa> getTarefas(){
         return projetoSelecionado.getTarefas();
-    }
-
-    public String visualizar(Projeto projeto) {
-        projetoSelecionado = projetoService.buscarProjetoPorId(projeto.getId());
-        return "/views/projeto/visualizarProjeto.xhtml?faces-redirect=true";
-    }
-
-    public String editar(Projeto projeto) {
-        this.projetoSelecionado = this.projetoService.buscarProjetoPorId(projeto.getId());
-        return "/views/projeto/editarProjeto.xhtml?faces-redirect=true";
-    }
-
-    public String retornar() {
-        System.out.println("chamou aqui");
-        return "/views/projeto/listaProjetos.xhtml?faces-redirect=true";
     }
     
 }

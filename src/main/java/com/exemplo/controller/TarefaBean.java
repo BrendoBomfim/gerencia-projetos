@@ -28,7 +28,7 @@ public class TarefaBean implements Serializable{
     private List<Tarefa> tarefas;
     
     @PostConstruct
-    public void inicializar() {
+    public void inicializar() { 
         if (tarefaService == null) {
             throw new IllegalStateException("TarefaService não foi injetado corretamente");
         }
@@ -57,6 +57,16 @@ public class TarefaBean implements Serializable{
     public String novaTarefa() {
         tarefaSelecionada = new Tarefa();
         return "/views/tarefa/cadastroTarefa.xhtml?faces-redirect=true";
+    }
+
+    public String visualizar(Tarefa tarefa) {
+        this.tarefaSelecionada = this.tarefaService.buscarTarefaPorId(tarefa.getId());
+        return "/views/tarefa/visualizarTarefa.xhtml?faces-redirect=true";
+    }
+
+    public String editar(Tarefa tarefa) {
+        this.tarefaSelecionada = this.tarefaService.buscarTarefaPorId(tarefa.getId());
+        return "/views/tarefa/editarTarefa.xhtml?faces-redirect=true";
     }
     
     public String cancelar() {
@@ -91,18 +101,4 @@ public class TarefaBean implements Serializable{
         this.projetoBean = projetoBean;
     }
 
-
-    public String visualizar(Tarefa tarefa) {
-        this.tarefaSelecionada = this.tarefaService.buscarTarefaPorId(tarefa.getId());
-        return "/views/tarefa/visualizarTarefa.xhtml?faces-redirect=true";
-    }
-
-    public String editar(Tarefa tarefa) {
-        this.tarefaSelecionada = this.tarefaService.buscarTarefaPorId(tarefa.getId());
-        return "/views/tarefa/editarTarefa.xhtml?faces-redirect=true";
-    }
-
-    public void carregarTarefasPorProjeto(Long id) {
-        tarefas = tarefaService.listarTarefasPorProjeto(id);
-    }
 }
