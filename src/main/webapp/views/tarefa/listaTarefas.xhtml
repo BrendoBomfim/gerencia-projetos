@@ -4,27 +4,40 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:rich="http://richfaces.org/rich">
 
-<h:body>
-    
-    <h:form>
-        <rich:dataTable value="#{projetoBean.tarefas}" var="tarefa">
-            <rich:column>
-                <f:facet name="header">Título</f:facet>
-                #{tarefa.titulo}
-            </rich:column>
-            <rich:column>
-                <f:facet name="header">Descrição</f:facet>
-                #{tarefa.descricao}
-            </rich:column>
-            <rich:column>
-                <f:facet name="header">Ações</f:facet>
-                <h:commandButton value="Visualizar" action="#{tarefaBean.visualizar(tarefa)}" />
-                <h:commandButton value="Editar" action="#{tarefaBean.editar(tarefa)}" />
-                <h:commandButton value="Excluir" action="#{tarefaBean.excluir(tarefa)}" />
-            </rich:column>
-        </rich:dataTable>
+<h:head>
+    <title>Lista de Tarefas</title>
+    <h:outputStylesheet library="css" name="styles.css"/>
+</h:head>
 
-        <h:commandButton value="Nova Tarefa" action="#{tarefaBean.novaTarefa()}" />
+<h:body>
+    <h:form>
+        <h:panelGroup rendered="#{not empty projetoBean.tarefas}">
+            <rich:dataTable value="#{projetoBean.tarefas}" var="tarefa" class="rich-table">
+                <rich:column>
+                    <f:facet name="header">Título</f:facet>
+                    #{tarefa.titulo}
+                </rich:column>
+                <rich:column>
+                    <f:facet name="header">Descrição</f:facet>
+                    #{tarefa.descricao}
+                </rich:column>
+                <rich:column>
+                    <div class="actions">
+                        <f:facet name="header">Ações</f:facet>
+                        <h:commandButton value="Visualizar" action="#{tarefaBean.visualizar(tarefa.id)}" />
+                        <h:commandButton value="Editar" action="#{tarefaBean.editar(tarefa.id)}" />
+                        <h:commandButton value="Excluir" action="#{tarefaBean.excluir(tarefa)}" />
+                    </div>
+                </rich:column>
+            </rich:dataTable>
+        </h:panelGroup>
+
+        <h:panelGroup rendered="#{empty projetoBean.tarefas}" class="no-data-container">
+            <h:outputText value="Este projeto ainda não possui tarefas" styleClass="no-data-message" />
+            <br/>
+        </h:panelGroup>
+
+        <h:commandButton value="Nova Tarefa" action="#{tarefaBean.novaTarefa()}" class="new-task-button"/>
     </h:form>
 </h:body>
 

@@ -16,6 +16,10 @@
         <param-name>contextConfigLocation</param-name>
         <param-value>classpath:/META-INF/applicationContext.xml</param-value>
     </context-param>
+    <context-param>
+        <param-name>org.richfaces.skin</param-name>
+        <param-value>blueSky</param-value>
+    </context-param>
     <servlet>
         <servlet-name>Faces Servlet</servlet-name>
         <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>

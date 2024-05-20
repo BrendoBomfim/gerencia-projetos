@@ -45,13 +45,13 @@ public class TarefaBean implements Serializable{
             tarefaService.atualizarTarefa(tarefaSelecionada);
         }
         tarefaSelecionada = new Tarefa();
-        return projetoBean.visualizar(projetoSelecionado);
+        return projetoBean.visualizar(projetoSelecionado.getId());
     }
     
     public void excluir(Tarefa tarefa) {
         tarefaService.excluirTarefa(tarefa);
         Projeto projetoSelecionado = projetoBean.getProjetoSelecionado();
-        projetoBean.visualizar(projetoSelecionado);
+        projetoBean.visualizar(projetoSelecionado.getId());
     }
     
     public String novaTarefa() {
@@ -59,13 +59,13 @@ public class TarefaBean implements Serializable{
         return "/views/tarefa/cadastroTarefa.xhtml?faces-redirect=true";
     }
 
-    public String visualizar(Tarefa tarefa) {
-        this.tarefaSelecionada = this.tarefaService.buscarTarefaPorId(tarefa.getId());
+    public String visualizar(Long tarefaId) {
+        this.tarefaSelecionada = this.tarefaService.buscarTarefaPorId(tarefaId);
         return "/views/tarefa/visualizarTarefa.xhtml?faces-redirect=true";
     }
 
-    public String editar(Tarefa tarefa) {
-        this.tarefaSelecionada = this.tarefaService.buscarTarefaPorId(tarefa.getId());
+    public String editar(Long tarefaId) {
+        this.tarefaSelecionada = this.tarefaService.buscarTarefaPorId(tarefaId);
         return "/views/tarefa/editarTarefa.xhtml?faces-redirect=true";
     }
     

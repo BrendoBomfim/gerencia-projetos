@@ -6,27 +6,37 @@
 
 <h:head>
     <title>Lista de Projetos</title>
+    <h:outputStylesheet library="css" name="styles.css"/>
 </h:head>
 
 <h:body>
-    <h1>Lista de Projetos</h1>
+    <rich:panel header="Lista de Projetos" class="spaced-panel">
+        <h:form>
+            <h:panelGroup rendered="#{not empty projetoBean.projetos}">
+                <rich:dataTable value="#{projetoBean.projetos}" var="projeto" class="rich-table">
+                    <rich:column>
+                        <f:facet name="header">Título</f:facet>
+                        #{projeto.titulo}
+                    </rich:column>
+                    <rich:column>
+                        <f:facet name="header">Ações</f:facet>
+                        <div class="actions">
+                            <h:commandButton value="Visualizar" action="#{projetoBean.visualizar(projeto.id)}" />
+                            <h:commandButton value="Editar" action="#{projetoBean.editar(projeto.id)}" />
+                            <h:commandButton value="Excluir" action="#{projetoBean.excluir(projeto.id)}" />
+                        </div>
+                    </rich:column>
+                </rich:dataTable>
+            </h:panelGroup>
 
-    <h:form>
-        <rich:dataTable value="#{projetoBean.projetos}" var="projeto">
-            <rich:column>
-                <f:facet name="header">Título</f:facet>
-                #{projeto.titulo}
-            </rich:column>
-            <rich:column>
-                <f:facet name="header">Ações</f:facet>
-                <h:commandButton value="Visualizar" action="#{projetoBean.visualizar(projeto)}" />
-                <h:commandButton value="Editar" action="#{projetoBean.editar(projeto)}" />
-                <h:commandButton value="Excluir" action="#{projetoBean.excluir(projeto)}" />
-            </rich:column>
-        </rich:dataTable>
+            <h:panelGroup rendered="#{empty projetoBean.projetos}" class="no-data-container">
+                <h:outputText value="Ainda não ha projetos cadastrados" styleClass="no-data-message" />
+                <br/>
+            </h:panelGroup>
 
-        <h:commandButton value="Novo Projeto" action="#{projetoBean.novoProjeto()}" />
-    </h:form>
+            <h:commandButton value="Novo Projeto" action="#{projetoBean.novoProjeto()}" />
+        </h:form>
+    </rich:panel>
 </h:body>
 
 </html>
