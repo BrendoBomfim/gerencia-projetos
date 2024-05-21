@@ -21,7 +21,7 @@ Este é um aplicativo web de gerenciamento de projetos e tarefas. Ele permite ao
 
 1. Clone este repositório para sua máquina local:
    ```
-   git clone https://github.com/BrendoBomfim/gerenciador-projetos.git
+   git clone https://github.com/seu-usuario/gerencia-projetos.git
    ```
 
 2. Importe o projeto em sua IDE Java como um projeto Maven.
